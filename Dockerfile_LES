@@ -13,9 +13,7 @@ RUN yum -y update && \
     yum -y install make && \
     yum -y install autoconf && \
     yum -y install gcc && \
-    yum -y clean all && \
     make configure && \
     ./configure --prefix=/usr && \
-    make -j$(nproc) all doc info && \
-    make install install-doc install-html install-info
+    make -j$(nproc) all
 CMD ["git","--version"]
