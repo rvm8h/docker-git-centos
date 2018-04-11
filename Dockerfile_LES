@@ -7,14 +7,15 @@ RUN yum -y update && \
     yum -y install wget dh-autoreconf curl-devel expat-devel gettext-devel openssl-devel perl-devel zlib-devel asciidoc xmlto docbook2X getopt && \
     wget https://github.com/git/git/archive/v2.17.0.tar.gz && \
     tar -zxf v2.17.0.tar.gz && \
-    yum remove wget && yum clean all \
+    yum -y remove wget && \
     ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi && \
     cd git-2.17.0 && \
     yum -y install make && \
     yum -y install autoconf && \
     yum -y install gcc && \
+    yum -y clean all && \
     make configure && \
     ./configure --prefix=/usr && \
     make -j$(nproc) all doc info && \
-    make install install-doc install-html install-info && \
+    make install install-doc install-html install-info
 CMD ["git","--version"]
