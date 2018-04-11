@@ -16,4 +16,5 @@ RUN yum -y update && \
     make configure && \
     ./configure --prefix=/usr && \
     make -j$(nproc) all
+    make install
 CMD ["git","--version"]
