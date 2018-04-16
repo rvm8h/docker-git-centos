@@ -1,0 +1,14 @@
+FROM centos:latest
+
+
+WORKDIR /git
+RUN yum update
+RUN yum -y groupinstall "Development Tools"
+RUN yum -y install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel
+COPY . /git
+RUN ls
+RUN yum -y install git-2.17.0.tar.gz
+#RUN yum -y install git
+RUN echo "git --version"
+
+
