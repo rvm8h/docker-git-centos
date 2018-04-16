@@ -4,11 +4,20 @@ FROM centos:latest
 MAINTAINER LMO lmo@lmo.com
 
 WORKDIR gitserver
-
-RUN set -x \
-    && yum groupinstall "Development Tools" \
-    && yum install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel \
-    && yum -y install net-tools \
-    && yum install -y git
+RUN yum -y update &&\
+    yum -y install wget &&\
+    yum -y install dh-autoreconf curl-devel expat-devel gettext-devel openssl-devel perl-devel zlib-devel &&\
+    yum -y install asciidoc xmlto docbook2X getopt &&\
+    ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi &&\
+    yum -y install gcc &&\
+    yum -y install make &&\
+    yum -y install autoconf &&\
+    wget https://www.kernel.org/pub/software/scm/git/git-2.7.6.tar.gz &&\
+    tar -zxf git-2.6.7.tar.gz &&\
+    cd git-2.6.7.tar.gz &&\
+    autoconf &&\
+    ./configure --prefix=/usr &&\
+    make all
+CMD ["git", "--version"]    
 
 
